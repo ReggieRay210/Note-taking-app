@@ -10,7 +10,6 @@ function App() {
 
   // for note debugging
   // console.log("current notes:", notes )
-  //this is a test
 
   // Load notes from localStorage when the app starts
   useEffect(() => {
@@ -62,6 +61,9 @@ function App() {
           <button type="submit" className="add-button">
             Add Note
           </button>
+
+          {/* dropdown for attaching note to previous created note */}
+          
         </form>
         {/* // note list will go here */}
         <div className="notes-list">
