@@ -41,16 +41,19 @@ h1 {
 
 .note-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
+  align-items: center;
 }
 
 .note-input {
-  flex: 1;
+  flex: 2;
   padding: 12px;
   border: 2px solid #303030;
   border-radius: 16px;
   font-size: 16px;
+  min-width: 200px;
   transition: border-color 0.3s;
 }
 
@@ -68,10 +71,28 @@ h1 {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
+  flex: 0;
+  min-width: 100px;
 }
 
 .add-button:hover {
   background: #0056b3;
+}
+
+.parent-select{
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  min-width: 200px;
+  flex: 1;
+}
+
+.parent-select:focus {
+  outline: none;
+  border-color:#007bff;
 }
 
 .notes-list h2 {
@@ -103,6 +124,19 @@ h1 {
   padding: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
+}
+.note-card.has-parent{
+  border-left: 4px solid #007bff;
+}
+
+.note-parent-badge{
+  display: inline-block;
+  background-color: #e7f3ff;
+  color: #007bff;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-bottom: 8px;
 }
 
 .delete-button {

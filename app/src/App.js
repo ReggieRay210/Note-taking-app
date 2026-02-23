@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   // state for the current note being typed in.
   const [currentNote, setCurrentNote] = useState('');
+  const [selectedParentId, setSelectedParentId] = useState('');
 
   // state for storing all notes
   const [notes, setNotes] = useState([]);
@@ -19,7 +20,7 @@ function App() {
     }
   }, []);
 
-  // Save notes to localStorage when the notes chanes
+  // Save notes to localStorage when the notes change
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]); //runs whenever 'notes' state changes.
@@ -32,6 +33,7 @@ function App() {
         id: Date.now(), // collect unique ID for timestamp
         text: currentNote,
         date: new Date().toLocaleDateString(),
+        parentId: selectedParentId || null, 
       };
       setNotes([...notes, newNote]);
       setCurrentNote(''); //clear input after submission
@@ -63,7 +65,15 @@ function App() {
           </button>
 
           {/* dropdown for attaching note to previous created note */}
-          
+          <select className='parent-select' value={selectedParentId} onChange={(form)=>setSelectedParentId(form.target.value)}>
+            <option value=''>-- Attach to existing note(optional) --</option>
+            {notes.map((note)=>(
+              <option key={note.id} value={note.id}>
+              {note.text.substring(0,30)}{note.text.length > 30 ? "...":''}
+              </option>
+            ))}
+          </select>
+
         </form>
         {/* // note list will go here */}
         <div className="notes-list">
@@ -76,19 +86,29 @@ function App() {
             </p>
           ) : (
             <div className="notes-grid">
-              {notes.map((note) => (
-                <div key={note.id} className="note-card">
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(note.id)}
-                    aria-label="Delete note"
-                  >
-                    x
-                  </button>
-                  <p className="note-text">{note.text}</p>
-                  <small className="note-date">{note.date}</small>
-                </div>
-              ))}
+              {notes.map((note) => {
+                // find the parent note if it exists
+                const parentNote = notes.find(note => note.id === note.parentId);
+                return(
+                  <div key={note.id} className={`note-card ${note.parentId ? 'has-parent' : '' }`}>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDelete(note.id)}
+                      aria-label="Delete note"
+                    >
+                      x
+                    </button>
+                    {/* {Show parent badge if note has a parent} */}
+                    {parentNote && (
+                      <div className="note-parent-badge">
+                        ↳ Response to: {parentNote.text.substring(0, 20)}...
+                      </div>
+                    )}
+                    <p className="note-text">{note.text}</p>
+                    <small className="note-date">{note.date}</small>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
