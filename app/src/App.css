@@ -1,38 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: #f0f2f5;
+}
+
 .App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
   text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 30px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.note-app {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.note-app::after {
+  content: '💾 Auto-saved';
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 0.7rem;
+  color: #999;
+  opacity: 0.5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.note-form {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.note-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #303030;
+  border-radius: 16px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.note-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.add-button {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-button:hover {
+  background: #0056b3;
+}
+
+.notes-list h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.no-notes {
+  text-align: center;
+  color: #999;
+  padding: 40px 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.note-card {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: #ff4444;
+  color: white;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+.note-card:hover .delete-button {
+  opacity: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-button:hover {
+  background-color: #cc0000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.note-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.note-text {
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  padding-right: 20px;
+}
+
+.note-date {
+  color: #999;
+  font-size: 0.8rem;
+  display: block;
+  text-align: right;
 }
