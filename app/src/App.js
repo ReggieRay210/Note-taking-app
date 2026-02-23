@@ -49,6 +49,16 @@ function App() {
 
   return (
     <div className="App">
+      {/* Add wave background */}
+      <div className='bg'> 
+        <svg viewBox='0 0 1440 800' preserveAspectRatio='none'>
+          <path className='wave w1' d="M0,200 c400,100 800,300 1440,200"/>
+          <path className='wave w2' d="M0,250 c400,150 800,350 1440,250"/>
+          <path className='wave w3' d="M0,300 c400,200 800,400 1440,300"/>
+          <path className='wave w4' d="M0,350 c400,250 800,450 1440,350"/>
+        </svg>
+      </div>
+
       <h1>📔 Note-taking App</h1>
       <div className="note-app">
         {/* // Note form will go here */}
@@ -56,7 +66,7 @@ function App() {
           <input
             type="text"
             className="note-input"
-            placeholder="Enter your note here..."
+            placeholder="✏️ Enter your note here..."
             value={currentNote}
             onChange={(ev) => setCurrentNote(ev.target.value)}
           />
