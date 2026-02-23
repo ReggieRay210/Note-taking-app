@@ -37,6 +37,7 @@ function App() {
       };
       setNotes([...notes, newNote]);
       setCurrentNote(''); //clear input after submission
+      setSelectedParentId(''); //reset dropdown.
     }
   };
 
@@ -57,7 +58,7 @@ function App() {
             className="note-input"
             placeholder="Enter your note here..."
             value={currentNote}
-            onChange={(form) => setCurrentNote(form.target.value)}
+            onChange={(ev) => setCurrentNote(ev.target.value)}
           />
 
           <button type="submit" className="add-button">
@@ -65,7 +66,7 @@ function App() {
           </button>
 
           {/* dropdown for attaching note to previous created note */}
-          <select className='parent-select' value={selectedParentId} onChange={(form)=>setSelectedParentId(form.target.value)}>
+          <select className='parent-select' value={selectedParentId} onChange={(ev)=>setSelectedParentId(ev.target.value)}>
             <option value=''>-- Attach to existing note(optional) --</option>
             {notes.map((note)=>(
               <option key={note.id} value={note.id}>
@@ -88,7 +89,7 @@ function App() {
             <div className="notes-grid">
               {notes.map((note) => {
                 // find the parent note if it exists
-                const parentNote = notes.find(note => note.id === note.parentId);
+                const parentNote = notes.find(n => n.id === note.parentId);
                 return(
                   <div key={note.id} className={`note-card ${note.parentId ? 'has-parent' : '' }`}>
                     <button
