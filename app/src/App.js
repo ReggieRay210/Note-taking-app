@@ -10,6 +10,7 @@ function App() {
 
   // for note debugging
   // console.log("current notes:", notes )
+  //this is a test
 
   // Load notes from localStorage when the app starts
   useEffect(() => {
