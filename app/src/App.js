@@ -10,19 +10,51 @@ function App() {
   const [notes, setNotes] = useState([]);
 
   // for note debugging
-  // console.log("current notes:", notes )
+  // Add this right after your useState declarations
+  useEffect(() => {
+    console.log('=== LocalStorage Debug ===');
+    console.log('1. Checking if localStorage is available:', typeof localStorage !== 'undefined');
+    
+    try {
+      const test = 'test';
+      localStorage.setItem('test', test);
+      const result = localStorage.getItem('test');
+      console.log('2. Can write to localStorage:', result === test);
+      localStorage.removeItem('test');
+    } catch (e) {
+      console.log('3. localStorage error:', e.message);
+    }
+    
+    const savedNotes = localStorage.getItem('notes');
+    console.log('4. Existing notes in localStorage:', savedNotes);
+    console.log('=========================');
+  }, []);
 
   // Load notes from localStorage when the app starts
   useEffect(() => {
+    console.log("Page load/refresh - Attempting to load notes...");
     const savedNotes = localStorage.getItem('notes');
+    console.log("Raw data from localStorage on load:", savedNotes);
     if (savedNotes) {
-      setNotes(JSON.parse(savedNotes));
+      try {
+        const parsedNotes = JSON.parse(savedNotes);
+        console.log("Parsed Notes on load:", parsedNotes);
+        setNotes(JSON.parse(savedNotes));
+      }catch (error){
+        console.log("Error parsing saved notes:", error);
+      }
+    }else{
+      console.log("No Notes found in localStorage on load");
     }
   }, []);
 
   // Save notes to localStorage when the notes change
   useEffect(() => {
+    console.log("Saving to LocalStorage:",notes);
     localStorage.setItem('notes', JSON.stringify(notes));
+
+    const saved = localStorage.getItem("notes");
+    console.log("verified saved notes:", JSON.parse(saved));
   }, [notes]); //runs whenever 'notes' state changes.
 
   // handle submission of form
