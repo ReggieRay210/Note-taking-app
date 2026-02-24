@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Note-Taking App",
+  "name": "Note taking app - created by Reginald Griffin.",
   "icons": [
     {
       "src": "favicon.ico",
