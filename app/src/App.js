@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 // import {PluresNode, SQLiteCompatibleAPI} from "pluresdb";
 
-async function App() {
+function App() {
   // state for the current note being typed in.
   const [currentNote, setCurrentNote] = useState('');
   const [selectedParentId, setSelectedParentId] = useState('');
