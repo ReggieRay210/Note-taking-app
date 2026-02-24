@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import {PluresNode, SQLiteCompatibleAPI} from "pluresdb";
+// import {PluresNode, SQLiteCompatibleAPI} from "pluresdb";
 
 async function App() {
   // state for the current note being typed in.
