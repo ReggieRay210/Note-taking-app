@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import {PluresNode, SQLiteCompatibleAPI} from "pluresdb";
 
-function App() {
+async function App() {
   // state for the current note being typed in.
   const [currentNote, setCurrentNote] = useState('');
   const [selectedParentId, setSelectedParentId] = useState('');
@@ -47,6 +48,26 @@ function App() {
       console.log("No Notes found in localStorage on load");
     }
   }, []);
+
+  // database configuration for pluresDB
+  // const db = new PluresNode({
+  //   config:{
+  //     port:34567,
+  //     host:"0.0.0.0", // this will listen on all network interfaces. 
+  //     dataDir: "./notes-data",
+  //   },
+  //   autoStart:true,
+  // });
+
+  // // Use SQLite-Compatible API
+  // const sqlite = new SQLiteCompatibleAPI();
+
+  // await sqlite.exec(`CREATE TABLE IF NOT EXISTS notes(
+  //   id INTEGER PRIMARY KEY,
+  //   text TEXT, 
+  //   date TEXT,
+  //   parentId INTEGER
+  // )`);
 
   // Save notes to localStorage when the notes change
   useEffect(() => {
